@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-pt" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,600&family=Ubuntu&family=Work+Sans&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/006642858d.js"></script>
+        <link rel="stylesheet" href="css/style.css">
+
+
+        <title>Inserir Aluno</title>
+
+        <meta name="author" content="Fenias Cossa"/>
+
+    </head>
+    <body>
+        <div th:replace="fragmentos/fragmentos :: cabecalho" href="css/style.css"></div>
+
+        <div  class="container" style="margin-top: 50px;">
+            <div style="display: flex; justify-content: space-between">
+                <h4>+ Inserir Aluno</h4>&nbsp; &nbsp; &nbsp; &nbsp;
+                <h4><a style="background-color: #a55eea; margin: 10px; padding: 7px; border-radius: 7px; text-decoration: none;" th:href="@{/alunos-adicionados}">Lista de Alunos</a></h4>
+            </div>
+            
+            <hr>
+            <br>
+
+            <form action="/InsertAlunos" method="post" th:object="${aluno}">
+                <div class="row">
+                    <div class="col-md-6 form-group offset-md-3">
+                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('nome')}">
+                            <label classe="validation-message" th:errors="*{nome}"></label>
+                        </div>
+                        <label>Nome do Aluno:</label>
+                        <input class="form-control" placeholder="Ex: Fenias Cossa" th:field="*{nome}">
+                    </div>
+                </div>
+
+                <!-- Curso -->
+
+                <div class="row">
+                    <div class="col-md-6 form-group offset-md-3">
+                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('curso')}">
+                            <label classe="validation-message" th:errors="*{curso}"></label>
+                        </div>
+                        <label>Selecione o curso:</label>
+                        <select class="form-control" th:field="*{curso}">
+                            <option th:each="curso : ${T(com.academy.Enums.Curso).values()}" th:value="${curso}" th:text="${curso}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Matricula -->
+
+                <div class="row">
+                    <div class="col-md-6 form-group offset-md-3">
+                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('matricula')}">
+                            <label classe="validation-message" th:errors="*{matricula}"></label>
+                        </div>
+                        <label>Gerar Matricula:</label>
+                        <input class="form-control" id="matricula" th:field="*{matricula}">
+                        <button type="button" onclick="GerarMatricula();" class="btn btn-dark" style="margin-top: 10px;">Gerar</button>
+                    </div>
+                </div>
+
+                <!-- Status -->
+
+                <div class="row">
+                    <div class="col-md-6 form-group offset-md-3">
+                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('estado')}">
+                            <label classe="validation-message" th:errors="*{estado}"></label>
+                        </div>
+                        <label>Selecione o Status:</label>
+                        <select class="form-control" th:field="*{estado}">
+                            <option th:each="status : ${T(com.academy.Enums.Estado).values()}" th:value="${status}" th:text="${status}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--Turno -->
+
+                <div class="row">
+                    <div class="col-md-6 form-group offset-md-3">
+                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('turno')}">
+                            <label classe="validation-message" th:errors="*{turno}"></label>
+                        </div>
+                        <label>Selecione o Status:</label>
+                        <select class="form-control" th:field="*{turno}">
+                            <option th:each="turno : ${T(com.academy.Enums.Turno).values()}" th:value="${turno}" th:text="${turno}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <button type="submit" class="btn btn-success offset-md-5 ">SALVAR</button>
+                    &nbsp; &nbsp; &nbsp; &nbsp;
+                    <a th:href="@{index}" class="btn btn-outline-danger">VOLTAR</a>
+                </div>
+            </form>
+        </div>
+                <!-- Inicio do modal-->
+	<div class="modal fade" id="modalPesquisa">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content"> 
+				<div class="modal-header">
+					<h5 class="modal-title">Encotre um aluno</h5>
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+				</div>
+				<form method="POST" action="pesquisar-aluno" th:object="${aluno}">
+					<div class="modal-body">
+						<input type="text"th:field="*{nome}" class="form-control" >
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-danger" data-dismiss="modal">Fechar</button>
+						<button type="submit" class="btn btn-success">Pesquisar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+        
+        <script type="text/javascript" src="js/main.js"></script>
+        <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+        <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    </body>
+</html>

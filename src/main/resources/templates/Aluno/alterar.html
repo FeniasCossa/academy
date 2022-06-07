@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-pt" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,600&family=Ubuntu&family=Work+Sans&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/006642858d.js"></script>
+        <link rel="stylesheet" href="/css/style.css">
+
+
+        <title>Alterar Aluno</title>
+
+        <meta name="author" content="Fenias Cossa"/>
+
+    </head>
+    <body>
+
+        <div th:replace="fragmentos/fragmentos :: cabecalho" href="css/style.css"></div>
+
+        <div class="container" style="margin-top: 50px;">
+            <h4>+ Alterar Aluno</h4>
+
+            <hr>
+            <br>
+
+            <form action="/alterar" method="post" th:object="${aluno}">
+                <input type="hidden" th:field="*{id}">
+                <div class="row">
+                    <div class="col-md-6 form-group offset-md-3">
+                        <label>Nome do Aluno:</label>
+                        <input class="form-control" placeholder="Ex: Fenias Cossa" th:field="*{nome}">
+                    </div>
+                </div>
+
+                <!-- Curso -->
+
+                <div class="row">
+                    <div class="col-md-6 form-group offset-md-3">
+                        <label>Selecione o curso:</label>
+                        <select class="form-control" th:field="*{curso}">
+                            <option th:each="curso : ${T(com.academy.Enums.Curso).values()}" th:value="${curso}" th:text="${curso}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Matricula -->
+
+                <div class="row">
+                    <div class="col-md-6 form-group offset-md-3">
+                        <label>Gerar Matricula:</label>
+                        <input readonly="readonly" class="form-control" id="matricula" th:field="*{matricula}">
+                        <button type="button" onclick="GerarMatricula();" class="btn btn-dark" style="margin-top: 10px;">Gerar</button>
+                    </div>
+                </div>
+
+                <!-- Status -->
+
+                <div class="row">
+                    <div class="col-md-6 form-group offset-md-3">
+                        <label>Selecione o Status:</label>
+                        <select class="form-control" th:field="*{estado}">
+                            <option th:each="status : ${T(com.academy.Enums.Estado).values()}" th:value="${status}" th:text="${status}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--Turno -->
+
+                <div class="row">
+                    <div class="col-md-6 form-group offset-md-3">
+                        <label>Selecione o Status:</label>
+                        <select class="form-control" th:field="*{turno}">
+                            <option th:each="turno : ${T(com.academy.Enums.Turno).values()}" th:value="${turno}" th:text="${turno}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <button type="submit" class="btn btn-success offset-md-5 ">SALVAR</button>
+                    &nbsp; &nbsp; &nbsp; &nbsp;
+                    <a class="btn btn-outline-danger">VOLTAR</a>
+                </div>
+            </form>
+        </div>
+        <!-- Inicio do modal-->
+	<div class="modal fade" id="modalPesquisa">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content"> 
+				<div class="modal-header">
+					<h5 class="modal-title">Encotre um aluno</h5>
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+				</div>
+				<form method="POST" action="pesquisar-aluno" th:object="${aluno}">
+					<div class="modal-body">
+						<input type="text"th:field="*{nome}" class="form-control" >
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-danger" data-dismiss="modal">Fechar</button>
+						<button type="submit" class="btn btn-success">Pesquisar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+        <script type="text/javascript" src="js/main.js"></script>
+        <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+        <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<script src="https://kit.fontawesome.com/006642858d.js"></script>
+<link rel="stylesheet" href="css/login.css">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,600&family=Ubuntu&family=Work+Sans&display=swap" rel="stylesheet">
+
+<title>Projecto Academy - login</title>
+<meta name="author" content="Fenias Cossa"/>
+</head>
+<body>
+<div class="Login-Form">
+    <div class="container">
+        <div class="main-div">
+            <div class="texto-header">
+                <h2>Cadastro do usuario</h2>
+                <p>Crie seu Usuario no Sistema</p>
+            </div>
+            <form action="salvarUsuario" method="post" th:object="${usuario}">
+                <div class="form-group">
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}">
+                            <label classe="validation-message" th:errors="*{email}"></label>
+                        </div>
+                    <input type="email"  class="form-control" th:field="*{email}" placeholder="insira seu E-mail">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" th:field="*{user}" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" th:field="*{senha}" placeholder="Insira sua senha">
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <button type="button" class="btn btn-info">Voltar</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<script src="https://kit.fontawesome.com/006642858d.js"></script>
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,600&family=Ubuntu&family=Work+Sans&display=swap" rel="stylesheet">
+
+<title>Projecto Academy</title>
+
+<meta name="author" content="Fenias Cossa"/>
+
+</head>
+<body>
+	<!-- Cabecalho -->
+	<header th:fragment="cabecalho">
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #4527A0;">
+			<a class="navbar-brand" th:href="@{index}">
+				<img alt="logo" src="img/logo header-site.png" width="200px"/>
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMobile">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		
+			<div id="navMobile" class="navbar-collapse collapse justify-content-end">
+			
+			<a th:href="@{index}" class="btn-nav nav-item nav-link"><i class="fas fa-home"></i>Home</a>
+			<a class="btn-nav nav-item nav-link" th:href="@{inserirAlunos}"><i class="fas fa-user-graduate"></i>Cadatrar aluno</a>
+			<a data-toggle="modal" data-target="#modalPesquisa" class="btn-nav nav-item nav-link"><i class="fas fa-search"></i>Pesquisar aluno</a>
+			<strong><span th:text="${session.usuarioLogado.user}"></span></strong>
+                        <form action="/logout" method="POST">
+			<button type="submit" class="btn-nav nav-item nav-link btn-danger"><i class="fas fa-times"></i>Sair</button>
+			</form>
+			</div>
+		
+		</nav>
+	</header>	
+	<div th:fragment="modal" class="modal fade" id="modalPesquisa">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content"> 
+				<div class="modal-header">
+					<h5 class="modal-title">Encotre um aluno</h5>
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+				</div>
+				<form method="POST" action="pesquisar-aluno" th:object="${aluno}">
+					<div class="modal-body">
+						<input type="text"th:field="*{nome}" class="form-control" >
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-danger" data-dismiss="modal">Fechar</button>
+						<button type="submit" class="btn btn-success">Pesquisar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+        <footer th:fragment="rodape">
+	<div class="rodape">
+	<span>Todos os direitos reservados - 2022 &copy; Fenias Cossa</span>
+	</div>
+	</footer>
+
+
+	<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	
+</body>
+</html>

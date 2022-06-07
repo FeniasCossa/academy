@@ -56,7 +56,7 @@ public class UsuarioController {
 		ModelAndView mv=new ModelAndView();
 		if(br.hasErrors()) {
 			mv.setViewName("Login/login");
-                        mv.addObject("usuario");
+            mv.addObject("usuario");
 		}else{
                     serviceUsuario.SalvarUsuario(usuario);
                     mv.setViewName("redirect:/");  

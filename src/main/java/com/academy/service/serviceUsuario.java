@@ -34,4 +34,6 @@ public class serviceUsuario {
 		Usuario userLogin=repositorio.buscarLogin(user, senha);
 		return userLogin;
 	}
+	
+
 }

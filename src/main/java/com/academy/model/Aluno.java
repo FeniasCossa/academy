@@ -1,22 +1,13 @@
 package com.academy.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.*;
-
-import org.hibernate.annotations.Type;
-
-import com.academy.Enums.Curso;
-import com.academy.Enums.Estado;
-import com.academy.Enums.Turno;
 
 @Entity
 public class Aluno implements Serializable {
@@ -33,9 +24,8 @@ public class Aluno implements Serializable {
     private String nome;
 
     @Column(name = "curso")
-    @Enumerated(EnumType.STRING)
     @NotNull(message = "O campo curso nao pode ser nulo")
-    private Curso curso;
+    private String curso;
 
     @Column(name = "matricula")
     @NotNull(message = "Clique no botão Gerar matricula")
@@ -44,13 +34,11 @@ public class Aluno implements Serializable {
 
     @NotNull(message = "O campo Estado nao pode ser nulo")
     @Column(name = "estado")
-    @Enumerated(EnumType.STRING)
-    private Estado estado;
+    private String estado;
 
     @NotNull(message = "O campo turno nao pode ser nulo")
     @Column(name = "turno")
-    @Enumerated(EnumType.STRING)
-    private Turno turno;
+    private String turno;
 
     public Integer getId() {
         return id;
@@ -64,11 +52,11 @@ public class Aluno implements Serializable {
         return nome;
     }
 
-    public Curso getCurso() {
+    public String getCurso() {
         return curso;
     }
 
-    public void setCurso(Curso curso) {
+    public void setCurso(String curso) {
         this.curso = curso;
     }
 
@@ -84,19 +72,19 @@ public class Aluno implements Serializable {
         this.matricula = matricula;
     }
 
-    public Estado getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
-    public Turno getTurno() {
+    public String getTurno() {
         return turno;
     }
 
-    public void setTurno(Turno turno) {
+    public void setTurno(String turno) {
         this.turno = turno;
     }
 

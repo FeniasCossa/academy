@@ -3,6 +3,7 @@ package com.academy.Dao;
 
 import com.academy.model.Aluno;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,4 +25,6 @@ public interface AlunoDao extends JpaRepository<Aluno, Integer> {
 	
 	
 	public List<Aluno> findByNomeContainingIgnoreCase(String nome);
+
+	public List<Aluno> findAllById(Integer id);
 }
